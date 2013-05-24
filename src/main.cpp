@@ -4306,6 +4306,12 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
             vecPriority.pop_back();
 
             // Size limits
+            // if the blocksize is near the maxsize,
+            // then we can only insert exactly one tx, 
+            // 257-259 bytes tx (2 in 2out) is most common types.
+            if (nBlockSize + 260 >= nBlockMaxSize)
+                break;
+
             unsigned int nTxSize = ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
             if (nBlockSize + nTxSize >= nBlockMaxSize)
                 continue;

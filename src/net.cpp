@@ -22,6 +22,10 @@
 #include <miniupnpc/upnperrors.h>
 #endif
 
+#ifndef WIN32
+#include <fcntl.h>
+#endif
+
 // Dump addresses to peers.dat every 15 minutes (900s)
 #define DUMP_ADDRESSES_INTERVAL 900
 
